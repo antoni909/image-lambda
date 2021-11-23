@@ -10,10 +10,18 @@ Create an S3 Bucket with “open” read permissions, so that anyone can see the
   'make the resource (S3 obj) public to any service on AWS'
 A user should be able to upload an image at any size, and update a dictionary of all images that have been uploaded so far
 
+  ' let user upload img, any size '
+  ' let user update a dictionary (arr of all imgs) = img.json'
+  ' when img uploaded: '
+  ' 1. download img.json '
+  ' 2. return meta data obj that describes the img '
+  ' 3. append new img to dictionary'
+  ' 4. upload image.json to S3'
+
 When an image is uploaded to your S3 bucket, it should trigger a Lambda function which must:
 
 - Download a file called “images.json” from the S3 Bucket if it exists
-    'means to modify the file suing the s3 lib to look at file from lambda'
+    'means to modify the file using the s3 lib to look at file from lambda'
 - The images.json should be an array of objects, each representing an image. Create an empty array if this file is not present
     'start as empty arr and fill with objs as being created'
 Create a metadata object describing the image: Name, Size, Type, etc.
