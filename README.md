@@ -1,12 +1,18 @@
 # image-lambda
 
+automatically run some processing on image files after they’re uploaded to an S3 Bucket
 
+Q: ' In the Readme, explain buffer blocker in you own words'
+A: ' In class everyone had a difficult time working with the buffer format and how to provide the proper parameter format the putObject method require to place a new object into the S3 AWS service'
+
+![lambda test using AWS Management Console](img/lambdaTest.jpeg)
+![cloud watch logs - added 2 new images to s3 bucket](img/cloudwatch.jpeg)
+
+[image.json file with added images](https://to-process-bucket.s3.us-west-2.amazonaws.com/image.json)
 
 ## resources
 
 [working with objects](https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html)
-
-automatically run some processing on image files after they’re uploaded to an S3 Bucket
 
 ## Lambda Function
 
@@ -25,21 +31,22 @@ Create bucket
 1. Scroll down to find Create Event
 
 1. Create event notification
-  
-  - (With S3 Event Notifications, you can receive notifications when certain events happen in your bucket).
-  - Want to create an event for when new upload happens.
-  - Amazon S3 can publish notifications for object create, object delete, object restore, and Reduced Redundancy Storage Class (RRS) object loss events.
 
-  1. General Configuration for
-    Select:
+- (With S3 Event Notifications, you can receive notifications when certain events happen in your bucket).
+- Want to create an event for when new upload happens.
+- Amazon S3 can publish notifications for object create, object delete, object restore, and Reduced Redundancy Storage Class (RRS) object loss events.
+
+1. General Configuration for
+   Select:
+
+
     - event name
     - event types
     - destination
 
 1. User Event: Upload image
 
-  using:
-    - GUI - go to S3 bucket, upload an image to s3
+using: - GUI - go to S3 bucket, upload an image to s3
 
 ## AWS Management Console: [CloudWatch](https://us-west-2.console.aws.amazon.com/cloudwatch/home?region=us-west-2#)
 
@@ -49,8 +56,8 @@ Create bucket
 
 1. click CloudWatch
 
-  - this lets you see log details and log streams as events happen
-  - the event object value is --> { Records: [ {...data} ] }
+- this lets you see log details and log streams as events happen
+- the event object value is --> { Records: [ {...data} ] }
 
 1. When upload an image, lambda should add a .json object file on S3
 
