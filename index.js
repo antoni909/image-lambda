@@ -24,26 +24,25 @@ exports.handler = async (event) => {
 
         const paramsGet = {
             Bucket: bucket,
-            Key: 'images.json',
+            Key: 'image.json',
         };
 
         if(!isImage) {return `${key} is not an image file in bucket ${bucket}`}
 
         else{
 
-            const { ContentType, Body } = await s3.getObject(paramsGet).promise()
+            const { Body } = await s3.getObject(paramsGet).promise()
             let bodyToString = await Body.toString('utf-8'); //
             let objBody = JSON.parse(bodyToString)
             let dictionary = objBody.dictionary
             let metaData = { Bucket: bucket, Key: key, ETag: eTag, Size: size }
             dictionary.push(metaData)
             bodyToJSON = JSON.stringify(objBody)
-            console.log('*** bodyToJSON ',bodyToJSON)
-
+            
         }
-
+        
     } catch(err) { 
-        console.log('err: ',err);
+        console.log('*** err: ',err);
         const message = `Error getting object ${key} from bucket ${bucket}`;
         throw new Error(message);
     }
@@ -55,7 +54,7 @@ exports.handler = async (event) => {
         const paramsPut = {
             Body: bodyToJSON,
             Bucket: bucket,
-            Key: 'images.json'
+            Key: 'image.json'
         }
 
         try{
